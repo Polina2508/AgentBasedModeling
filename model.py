@@ -16,13 +16,22 @@ class Scientist(Agent):
 
 
 class Environment(Model):
-      def __init__(self, height=100, width=100):
+      def __init__(self, N, height=100, width=100):
+
+
+        self.num_agents = N
+
+        for i in range(self.num_agents):
+            a = Scientist(i, self)
+            self.schedule.add(a)
+
         self.height = height
         self.width = width
 
 
         self.schedule = RandomActivation(self)
         self.grid = SingleGrid(width, height, torus=True)
+
 
       # def step(self):
       #   """
