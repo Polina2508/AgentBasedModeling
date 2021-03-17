@@ -9,7 +9,7 @@ class ScientistAgent(Agent):
     Schelling segregation agent
     """
 
-    def __init__(self, pos, model, agent_type):
+    def __init__(self, pos, model, agent_type, energy, expertise, justice):
         """
         Create a new Schelling agent.
         Args:
@@ -21,9 +21,9 @@ class ScientistAgent(Agent):
         self.pos = pos
         self.type = agent_type
 
-        # self.energy = energy
-        # self.expertise = expertise
-        # self.justice = justice
+        self.energy = energy
+        self.expertise = expertise
+        self.justice = justice
         
 
     def step(self):
@@ -63,10 +63,18 @@ class Environment(Model):
             if self.random.random() < self.density:
                 if self.random.random() < self.minority_pc:
                     agent_type = 1
+                    energy = 1
+                    expertise = 1
+                    justice = 1
+
                 else:
                     agent_type = 0
+                    agent_type = 0
+                    energy = 0
+                    expertise = 0
+                    justice = 0
 
-                agent = ScientistAgent((x, y), self, agent_type)
+                agent = ScientistAgent((x, y), self, agent_type, energy, expertise, justice)
                 self.grid.position_agent(agent, (x, y))
                 self.schedule.add(agent)
 
