@@ -4,9 +4,11 @@ from mesa.space import MultiGrid
 
 class Scientist(Agent):
 
-    def __init__(self, unique_id, model):
+    def __init__(self, unique_id, model, energy, justice, expertise):
         super().__init__(unique_id, model)
-        self.wealth = 1
+        self.energy = energy
+        self.justice = justice
+        self.expertise = expertise
 
 class Environment(Model):
 
@@ -16,7 +18,7 @@ class Environment(Model):
         self.schedule = RandomActivation(self)
         # Create agents
         for i in range(self.num_agents):
-            a = Scientist(i, self)
+            a = Scientist(i, self, energy=1, justice=2, expertise=3)
             self.schedule.add(a)
 
             # Add the agent to a random grid cell
