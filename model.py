@@ -13,23 +13,42 @@ class Scientist(Agent):
         print("Energy", energy)
         print("Justice", justice)
         print("Expertise", expertise)
+
+
+class Object(Agent):
+
+    def __init__(self, unique_id, model):
+        super().__init__(unique_id, model)
+ 
+        
+        
+
     
 
 class Environment(Model):
 
-    def __init__(self, N, width, height):
+    def __init__(self, N, O, width, height):
         self.num_agents = 10
+        
         self.grid = MultiGrid(width, height, True)
         self.schedule = RandomActivation(self)
-        # Create agents
+
         for i in range(self.num_agents):
             a = Scientist(i,self, 
             energy=random.normalvariate(10, 2), 
             justice=random.normalvariate(10, 2), 
             expertise=random.normalvariate(10, 2))
-
-            self.schedule.add(a)
-            # Add the agent to a random grid cell
             x = self.random.randrange(self.grid.width)
             y = self.random.randrange(self.grid.height)
             self.grid.place_agent(a, (x, y))
+        
+        self.num_object = 5
+        for a in range(self.num_object):
+            b = Object(a, self)
+            x = self.random.randrange(self.grid.width)
+            y = self.random.randrange(self.grid.height)
+            self.grid.place_agent(b, (x, y))
+
+
+
+
