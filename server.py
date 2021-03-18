@@ -1,44 +1,20 @@
-
+from model import *
+from mesa.visualization.modules import CanvasGrid
 from mesa.visualization.ModularVisualization import ModularServer
-from mesa.visualization.modules import CanvasGrid, ChartModule, TextElement
-from mesa.visualization.UserParam import UserSettableParameter
-
-from model import Environment
 
 
-
-
-def schelling_draw(agent):
-    """
-    Portrayal Method for canvas
-    """
-    if agent is None:
-        return
-    portrayal = {"Shape": "circle", "r": 0.5, "Filled": "true", "Layer": 0}
-
-    if agent.type == 0:
-        portrayal["Color"] = ["#FF0000", "#FF9999"]
-        portrayal["stroke_color"] = "#00FF00"
-    else:
-        portrayal["Color"] = ["#0000FF", "#9999FF"]
-        portrayal["stroke_color"] = "#000000"
+def agent_portrayal(agent):
+    portrayal = {"Shape": "circle",
+                 "Filled": "true",
+                 "Layer": 0,
+                 "Color": "red",
+                 "r": 0.5}
     return portrayal
 
-
-
-canvas_element = CanvasGrid(schelling_draw, 50, 50, 500, 500)
-# happy_chart = ChartModule([{"Label": "happy", "Color": "Black"}])
-
-model_params = {
-    "height": 50,
-    "width": 50,
-    # "density": UserSettableParameter("slider", "Agent density", 0.8, 0.1, 1.0, 0.1),
-    # "minority_pc": UserSettableParameter(
-    #     "slider", "Fraction minority", 0.2, 0.00, 1.0, 0.05
-    # ),
-    # "homophily": UserSettableParameter("slider", "Homophily", 3, 0, 8, 1),
-}
-
-server = ModularServer(
-    Environment, [canvas_element], "Environment", model_params
-)
+grid = CanvasGrid(agent_portrayal, 100, 100, 500, 500)
+server = ModularServer(Environment,
+                       [grid],
+                       "ScientistModel",
+                       {"N":100, "width":100, "height":100})
+server.port = 8521 # The default
+server.launch()
