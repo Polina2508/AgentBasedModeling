@@ -20,15 +20,11 @@ class Scientist(Agent):
     
         if living and self.random.random() < self.model.sheep_reproduce:
             # Create a new sheep:
-            lamb = Scientist(
+            lamb = Scientuuuist(
                 self.model.next_id(), self.pos, self.model, self.energy
             )
             self.model.grid.place_agent(lamb, self.pos)
             self.model.schedule.add(lamb)
-
-
-
-        
         
 
 
@@ -40,11 +36,7 @@ class Content(Agent):
     def __init__(self, unique_id, model):
         super().__init__(unique_id, model)
         
-
     
- 
-        
-        
 
     
 
@@ -71,11 +63,11 @@ class Environment(Model):
             x = self.random.randrange(self.grid.width)
             y = self.random.randrange(self.grid.height)
             self.grid.place_agent(b, (x, y))
-
         
 
 
     def step(self):
+        
         self.schedule.step()
 
 
