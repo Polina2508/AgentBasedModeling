@@ -22,7 +22,7 @@ def scientist_object_portrayal(agent):
         portrayal["r"] = 0.8
         portrayal["Layer"] = 1
 
-    elif isinstance(agent, Object):
+    elif isinstance(agent, Content):
         portrayal["Color"] = OBJECT_COLOR
         portrayal["r"] = 0.5
         portrayal["Layer"] = 1
