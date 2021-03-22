@@ -2,13 +2,13 @@ from mesa import Agent, Model
 from mesa.time import RandomActivation
 from mesa.space import MultiGrid
 import random
-from mesa.datacollection import DataCollector
+
 from random_walk import RandomWalker
 
 class Scientist(RandomWalker):
 
-    def __init__(self, unique_id, model, energy, justice, expertise):
-        
+    def __init__(self, unique_id, pos, model, energy, justice, expertise):
+        super().__init__(unique_id, pos, model)
         self.energy = energy
         self.justice = justice
         self.expertise = expertise
@@ -17,7 +17,9 @@ class Scientist(RandomWalker):
         print("Expertise", expertise)
 
     def step(self):
-        living = true
+        self.random_move()
+        living = True
+        
 
         if living and self.random.random() < self.model.scientist_reproduce:
             # Create a new sheep:
@@ -42,16 +44,19 @@ class Content(Agent):
     
 
 class Environment(Model):
+    height = 30
+    width = 30
 
-    def __init__(self, height, width, N, O, scientist_reproduce=0.04):
+    def __init__(self, height = 20, width = 20 , num_agents = 10, num_content = 5, scientist_reproduce=0.04):
         super().__init__()
         self.heidht = height
         self.width = width
-        self.num_agents = 10
+        self.num_agents = num_agents
+        self.num_content = num_content
         self.scientist_reproduce = scientist_reproduce
         
         self.schedule = RandomActivation(self)
-        self.grid = MultiGrid(self.width, self.height, torus = True)
+        self.grid = MultiGrid(self.height, self.width, torus = True)
      
        
 
@@ -69,14 +74,14 @@ class Environment(Model):
             energy=random.normalvariate(10, 2)
             justice=random.normalvariate(10, 2)
             expertise=random.normalvariate(10, 2)
-            a = Scientist(self.next_id(), (x, y), self, energy, justice, expertise)
+            a = Scientist(self.next_id(), (x, y), self, True, justice, expertise )
             self.grid.place_agent(a, (x, y))
             self.schedule.add(a)
 
 
         
-        self.num_object = 5
-        for a in range(self.num_object):
+        
+        for a in range(self.num_content):
             b = Content(a, self)
             x = self.random.randrange(self.grid.width)
             y = self.random.randrange(self.grid.height)
