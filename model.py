@@ -23,8 +23,8 @@ class Scientist(RandomWalker):
 
         if living and self.random.random() < self.model.scientist_reproduce:
             # Create a new sheep:
-            lamb = Scientist(
-                self.model.next_id(), self.pos, self.model, self.energy, self.justice, self.expertise
+            lamb = Content(
+                self.model.next_id(), self.model
             )
             self.model.grid.place_agent(lamb, self.pos)
             self.model.schedule.add(lamb)
