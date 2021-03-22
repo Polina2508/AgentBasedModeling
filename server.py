@@ -35,6 +35,6 @@ grid = CanvasGrid(scientist_object_portrayal, 30, 30, 500, 500)
 server = ModularServer(Environment,
                        [grid],
                        "ScientistModel",
-                       { "num_agents":10, "num_content":5, "width":30, "height":30})
+                       { "num_agents":10, "num_content":0, "width":30, "height":30})
 server.port = 8521 # The default
 server.launch()

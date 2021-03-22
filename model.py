@@ -5,10 +5,10 @@ import random
 
 from random_walk import RandomWalker
 
-class Scientist(RandomWalker):
+class Scientist(Agent):
 
     def __init__(self, unique_id, pos, model, energy, justice, expertise):
-        super().__init__(unique_id, pos, model)
+        super().__init__(unique_id, model)
         self.energy = energy
         self.justice = justice
         self.expertise = expertise
@@ -17,7 +17,7 @@ class Scientist(RandomWalker):
         print("Expertise", expertise)
 
     def step(self):
-        self.random_move()
+        
         living = True
         
 
@@ -34,10 +34,13 @@ class Scientist(RandomWalker):
         
 
 
-class Content(Agent):
+class Content(RandomWalker):
 
     def __init__(self, unique_id, model):
-        super().__init__(unique_id, model)
+        super().__init__(unique_id,self, model)
+
+    def step(self):
+        self.random_move()
         
     
 
@@ -97,15 +100,3 @@ class Environment(Model):
     def step(self):
         
         self.schedule.step()
-
-    
-
-
-
-
- 
-
-
-
-
-
