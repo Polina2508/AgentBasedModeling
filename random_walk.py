@@ -20,5 +20,5 @@ class RandomWalker(Agent):
       
         next_moves = self.model.grid.get_neighborhood(self.pos, True)
         next_move = self.random.choice(next_moves)
-     
+    
         self.model.grid.move_agent(self, next_move)
