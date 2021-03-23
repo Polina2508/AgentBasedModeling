@@ -50,12 +50,12 @@ class Environment(Model):
     height = 30
     width = 30
 
-    def __init__(self, height = 20, width = 20 , num_agents = 10, num_content = 5, scientist_reproduce=0.04):
+    def __init__(self, height = 20, width = 20 , num_agents = 10,  scientist_reproduce=0.04):
         super().__init__()
         self.heidht = height
         self.width = width
         self.num_agents = num_agents
-        self.num_content = num_content
+        # self.num_content = num_content
         self.scientist_reproduce = scientist_reproduce
         
         self.schedule = RandomActivation(self)
@@ -63,14 +63,6 @@ class Environment(Model):
      
        
 
-        # for i in range(self.num_agents):
-        #     a = Scientist(i,self,
-        #     energy=random.normalvariate(10, 2), 
-        #     justice=random.normalvariate(10, 2), 
-        #     expertise=random.normalvariate(10, 2))
-        #     x = self.random.randrange(self.grid.width)
-        #     y = self.random.randrange(self.grid.height)
-        #     self.grid.place_agent(a, (x, y))
         for i in range(self.num_agents):
             x = self.random.randrange(self.width)
             y = self.random.randrange(self.height)
@@ -84,11 +76,11 @@ class Environment(Model):
 
         
         
-        for a in range(self.num_content):
-            b = Content(a, self)
-            x = self.random.randrange(self.grid.width)
-            y = self.random.randrange(self.grid.height)
-            self.grid.place_agent(b, (x, y))
+        # for a in range(self.num_content):
+        #     b = Content(a, self)
+        #     x = self.random.randrange(self.grid.width)
+        #     y = self.random.randrange(self.grid.height)
+        #     self.grid.place_agent(b, (x, y))
 
 
         
