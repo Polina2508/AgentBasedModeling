@@ -5,9 +5,13 @@ from mesa.visualization.ModularVisualization import ModularServer
 OBJECT_COLOR = "#FF66FF"
 SCIENTIST_COLOR = "#660066"
 
+
+
+
 def scientist_object_portrayal(agent):
     if agent is None:
         return
+
 
     portrayal = {
         "Shape": "circle",
@@ -16,16 +20,17 @@ def scientist_object_portrayal(agent):
         "Filled": "true",
     }
 
-    if isinstance(agent, Scientist):
+    if type(agent) is Scientist:
 
         portrayal["Color"] = SCIENTIST_COLOR
         portrayal["r"] = 0.8
         portrayal["Layer"] = 1
 
-    elif isinstance(agent, Content):
+    elif type(agent) is Content:
         portrayal["Color"] = OBJECT_COLOR
         portrayal["r"] = 0.5
-        portrayal["Layer"] = 1
+        portrayal["Layer"] = 0
+
     return portrayal
 
 
